@@ -6,8 +6,8 @@ openai-key: ""
 openai-model: "gpt-3.5-turbo"
 
 # If you wish to use an OpenAI-compatible service other than the official OpenAI API,
-# modify this. Otherwise don't touch it.
-openai-endpoint: "https://api.openai.com/v1"
+# modify this. Otherwise don't touch it. This URL should always end with '/'
+openai-endpoint: "https://api.openai.com/v1/"
 
 # Log conversation messages to server console, useful for catching abuse
 log-conversations: true
