@@ -11,10 +11,13 @@ import tj.horner.villagergpt.conversation.VillagerConversation
 import tj.horner.villagergpt.conversation.pipeline.ConversationMessageProducer
 
 class OpenAIMessageProducer(config: Configuration) : ConversationMessageProducer {
+    private val defaultEndpoint = "https://api.openai.com/v1"
+
     private val openAI = OpenAI(
         OpenAIConfig(
             config.getString("openai-key")!!,
-            LogLevel.None
+            LogLevel.None,
+            baseUrl = config.getString("openai-endpoint") ?: defaultEndpoint
         )
     )
 
