@@ -6,18 +6,19 @@ import com.aallam.openai.api.logging.LogLevel
 import com.aallam.openai.api.model.ModelId
 import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
+import com.aallam.openai.client.OpenAIHost
 import org.bukkit.configuration.Configuration
 import tj.horner.villagergpt.conversation.VillagerConversation
 import tj.horner.villagergpt.conversation.pipeline.ConversationMessageProducer
 
 class OpenAIMessageProducer(config: Configuration) : ConversationMessageProducer {
-    private val defaultEndpoint = "https://api.openai.com/v1"
+    private val defaultEndpoint = "https://api.openai.com/v1/"
 
     private val openAI = OpenAI(
         OpenAIConfig(
             config.getString("openai-key")!!,
             LogLevel.None,
-            baseUrl = config.getString("openai-endpoint") ?: defaultEndpoint
+            host=OpenAIHost(config.getString("openai-endpoint") ?: defaultEndpoint)
         )
     )
 
