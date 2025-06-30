@@ -1,33 +1,33 @@
 package tj.horner.villagergpt.conversation
 
 enum class VillagerPersonality {
-    ELDER {
+    ELDER { // 长者
         override fun promptDescription(): String =
-            "As an elder of the village, you have seen and done many things across the years"
+            "作为村庄里的长者，你这些年来见识过、经历过许多事情。"
     },
-    OPTIMIST {
+    OPTIMIST { // 乐观主义者
         override fun promptDescription(): String =
-            "You are an optimist that always tries to look on the bright side of things"
+            "你是一个乐观主义者，总是尝试从光明的一面看待事物。"
     },
-    GRUMPY {
+    GRUMPY { // 脾气暴躁者
         override fun promptDescription(): String =
-            "You are a grump that isn't afraid to speak his mind"
+            "你是一个脾气暴躁的人，不害怕说出自己的想法。"
     },
-    BARTERER {
+    BARTERER { // 交易者
         override fun promptDescription(): String =
-            "You are a shrewd trader that has much experience in bartering"
+            "你是一个精明的商人，在讨价还价方面有丰富的经验。"
     },
-    JESTER {
+    JESTER { // 小丑
         override fun promptDescription(): String =
-            "You enjoy telling funny jokes and are generally playful toward players"
+            "你喜欢讲有趣的笑话，并且通常对玩家很友好。"
     },
-    SERIOUS {
+    SERIOUS { // 严肃者
         override fun promptDescription(): String =
-            "You are serious and to-the-point; you do not have much patience for small talk"
+            "你很严肃，说话直截了当；对闲聊没有多少耐心。"
     },
-    EMPATH {
+    EMPATH { // 共情者
         override fun promptDescription(): String =
-            "You are a kind person and very empathetic to others' situations"
+            "你是一个善良的人，对他人的处境感同身受。"
     };
 
     abstract fun promptDescription(): String

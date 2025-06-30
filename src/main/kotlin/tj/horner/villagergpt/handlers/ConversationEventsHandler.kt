@@ -24,9 +24,9 @@ import tj.horner.villagergpt.events.VillagerConversationStartEvent
 class ConversationEventsHandler(private val plugin: VillagerGPT) : Listener {
     @EventHandler
     fun onConversationStart(evt: VillagerConversationStartEvent) {
-        val message = Component.text("You are now in a conversation with ")
+        val message = Component.text("你正在与")
             .append(evt.conversation.villager.name().color(NamedTextColor.AQUA))
-            .append(Component.text(". Send a chat message to get started and use /ttvend to end it"))
+            .append(Component.text("交谈。发送聊天信息以开始对话，使用 /ttvend 以结束对话。"))
             .decorate(TextDecoration.ITALIC)
 
         evt.conversation.player.sendMessage(ChatMessageTemplate.withPluginNamePrefix(message))
@@ -39,9 +39,9 @@ class ConversationEventsHandler(private val plugin: VillagerGPT) : Listener {
 
     @EventHandler
     fun onConversationEnd(evt: VillagerConversationEndEvent) {
-        val message = Component.text("Your conversation with ")
+        val message = Component.text("与")
             .append(evt.villager.name().color(NamedTextColor.AQUA))
-            .append(Component.text(" has ended"))
+            .append(Component.text("的对话结束。"))
             .decorate(TextDecoration.ITALIC)
 
         evt.player.sendMessage(ChatMessageTemplate.withPluginNamePrefix(message))
@@ -60,8 +60,9 @@ class ConversationEventsHandler(private val plugin: VillagerGPT) : Listener {
         // Villager is in a conversation with another player
         val existingConversation = plugin.conversationManager.getConversation(villager)
         if (existingConversation != null && existingConversation.player.uniqueId != evt.player.uniqueId) {
-            val message = Component.text("This villager is in a conversation with ")
+            val message = Component.text("这个村民正在和[")
                 .append(existingConversation.player.displayName())
+                .append(Component.text("]交谈。请稍后再试。"))
                 .decorate(TextDecoration.ITALIC)
 
             evt.player.sendMessage(ChatMessageTemplate.withPluginNamePrefix(message))
@@ -75,7 +76,7 @@ class ConversationEventsHandler(private val plugin: VillagerGPT) : Listener {
         evt.isCancelled = true
 
         if (villager.profession == Villager.Profession.NONE) {
-            val message = Component.text("You can only speak to villagers with a profession")
+            val message = Component.text("这个村民没有职业，无法与之交谈。")
                 .decorate(TextDecoration.ITALIC)
 
             evt.player.sendMessage(ChatMessageTemplate.withPluginNamePrefix(message))
@@ -92,9 +93,9 @@ class ConversationEventsHandler(private val plugin: VillagerGPT) : Listener {
         evt.isCancelled = true
 
         if (conversation.pendingResponse) {
-            val message = Component.text("Please wait for ")
+            val message = Component.text("请耐心等待")
                 .append(conversation.villager.name().color(NamedTextColor.AQUA))
-                .append(Component.text(" to respond"))
+                .append(Component.text("的回复。"))
                 .decorate(TextDecoration.ITALIC)
 
             evt.player.sendMessage(ChatMessageTemplate.withPluginNamePrefix(message))
@@ -119,9 +120,9 @@ class ConversationEventsHandler(private val plugin: VillagerGPT) : Listener {
                 }
             }
         } catch(e: Exception) {
-            val message = Component.text("Something went wrong while getting ")
+            val message = Component.text("在获取")
                 .append(villager.name().color(NamedTextColor.AQUA))
-                .append(Component.text("'s response. Please try again"))
+                .append(Component.text("的回复时发生了错误，请稍后再试。"))
                 .decorate(TextDecoration.ITALIC)
 
             evt.player.sendMessage(ChatMessageTemplate.withPluginNamePrefix(message))
